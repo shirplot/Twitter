@@ -82,5 +82,8 @@ public class ComposeActivity extends AppCompatActivity {
         setResult(RESULT_OK, data);
 
         this.finish();
+
     }
+
+
 }
