@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.codepath.oauth.OAuthLoginActionBarActivity;
@@ -21,6 +22,11 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
+	}
+	public void onComposeAction(MenuItem mi) {
+		// first parameter is the context, second is the class of the activity to launch
+		Intent i = new Intent(this, ComposeActivity.class);
+		startActivityForResult(i, 1); // brings up the second activity
 	}
 
 	// OAuth authenticated successfully, launch primary authenticated activity
