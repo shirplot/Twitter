@@ -2,9 +2,15 @@ package com.codepath.apps.restclienttemplate.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.format.DateUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Locale;
+
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 /**
  * Created by splotnik on 6/26/17.
@@ -65,4 +71,34 @@ public class Tweet implements Parcelable {
             return new Tweet[size];
         }
     };
+
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getRelativeCreatedAt() {
+        return this.getRelativeTimeAgo(this.getCreatedAt());
+    }
+
+    private String getRelativeTimeAgo(String rawJsonDate) {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String relativeDate = "";
+        try {
+            long dateMillis = sf.parse(rawJsonDate).getTime();
+            relativeDate = DateUtils.getRelativeTimeSpanString(
+                    dateMillis,
+                    System.currentTimeMillis(),
+                    DateUtils.SECOND_IN_MILLIS
+            ).toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return relativeDate;
+    }
+
 }
