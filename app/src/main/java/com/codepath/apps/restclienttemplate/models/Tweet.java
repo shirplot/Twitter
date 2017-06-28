@@ -4,13 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateUtils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Locale;
-
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by splotnik on 6/26/17.
@@ -34,6 +35,18 @@ public class Tweet implements Parcelable {
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         return tweet;
+    }
+
+    public static ArrayList<Tweet> fromJSONArray(JSONArray jsonArray) throws JSONException {
+        ArrayList<Tweet> results = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                results.add(Tweet.fromJSON(jsonArray.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return results;
     }
 
 
