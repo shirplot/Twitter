@@ -2,13 +2,16 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -28,6 +31,8 @@ import cz.msebera.android.httpclient.Header;
 public class TimelineActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeContainer;
+    // Instance of the progress action-view
+    MenuItem miActionProgressItem;
 
     private TwitterClient client;
     TweetAdapter tweetAdapter;
@@ -53,6 +58,17 @@ public class TimelineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        // Find the toolbar view inside the activity layout
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
+
+        // Display icon in the toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.twitter_icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
         client = TwitterApp.getRestClient();
@@ -173,5 +189,25 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        // Extract the action-view from the menu item
+        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+        // Return to finish
+        return super.onPrepareOptionsMenu(menu);
+    }
+    public void showProgressBar() {
+        // Show progress item
+        miActionProgressItem.setVisible(true);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        miActionProgressItem.setVisible(false);
+    }
+
+
 
 }

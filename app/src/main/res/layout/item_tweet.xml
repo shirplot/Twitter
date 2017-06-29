@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="5dp"
     android:orientation="vertical">
 
@@ -27,7 +28,6 @@
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivProfileImage"
         android:layout_below="@+id/tvUsername"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
@@ -36,20 +36,50 @@
     <TextView
         android:id="@+id/tvScreenName"
         android:layout_width="wrap_content"
-        android:maxLines="1"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="TextView"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/tvUsername" />
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/tvUsername"
+        android:maxLines="1"
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/tvCreatedAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:maxLines="1"
         android:text="textView" />
+
+    <View style="@style/Divider"/>
+
+    <Button
+        android:id="@+id/likeBtn"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/ic_vector_heart_stroke"
+        android:layout_below="@id/tvBody"
+        android:layout_alignLeft="@id/tvBody"
+        />
+
+    <Button
+        android:id="@+id/retweetBtn"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/ic_vector_retweet_stroke"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@id/likeBtn"
+        />
+
+    <Button
+        android:id="@+id/replyBtn"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@id/tvCreatedAt"
+        android:layout_alignBaseline="@id/likeBtn"
+        android:layout_marginTop="165dp"
+        android:background="@mipmap/ic_reply" />
 
 </RelativeLayout>
