@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * Created by splotnik on 6/26/17.
  */
-
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
     private List<Tweet> mTweets;
     Context context ;
@@ -24,7 +23,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
 
     public TweetAdapter(List<Tweet> tweets) {
-
     mTweets =tweets;
 }
 
@@ -62,6 +60,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView createdAt;
         public TextView tvScreenName;
 
+
+
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -70,7 +70,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             createdAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
             tvScreenName = (TextView) itemView.findViewById(R.id.tvScreenName);
-
         }
 
     }
@@ -87,4 +86,5 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         mTweets.addAll(list);
         notifyDataSetChanged();
     }
+
 }

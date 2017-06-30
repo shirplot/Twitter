@@ -25,6 +25,7 @@ public class Tweet implements Parcelable {
     public User user;
     public String createdAt;
 
+
     // deserialize the JSON
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
@@ -114,4 +115,7 @@ public class Tweet implements Parcelable {
         return relativeDate;
     }
 
+    public User getUser() {
+        return this.user;
+    }
 }

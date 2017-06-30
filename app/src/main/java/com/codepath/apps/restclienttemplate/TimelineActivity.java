@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -52,6 +53,11 @@ public class TimelineActivity extends AppCompatActivity {
         // first parameter is the context, second is the class of the activity to launch
         Intent i = new Intent(this, ComposeActivity.class);
         startActivityForResult(i, 1); // brings up the second activity
+    }
+
+    public void onReplyAction(View view){
+        Intent i = new Intent(this, ReplyActivity.class);
+        startActivityForResult(i,1);
     }
 
     @Override

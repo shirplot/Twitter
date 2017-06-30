@@ -80,6 +80,8 @@
         android:layout_alignLeft="@id/tvCreatedAt"
         android:layout_alignBaseline="@id/likeBtn"
         android:layout_marginTop="165dp"
-        android:background="@mipmap/ic_reply" />
+        android:background="@mipmap/ic_reply"
+        android:onClick="onReplyAction"
+   />
 
 </RelativeLayout>
