@@ -84,6 +84,4 @@ public class ComposeActivity extends AppCompatActivity {
         this.finish();
 
     }
-
-
 }

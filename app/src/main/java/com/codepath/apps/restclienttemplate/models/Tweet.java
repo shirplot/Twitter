@@ -118,4 +118,8 @@ public class Tweet implements Parcelable {
     public User getUser() {
         return this.user;
     }
+
+    public long getUid() {
+        return uid;
+    }
 }
