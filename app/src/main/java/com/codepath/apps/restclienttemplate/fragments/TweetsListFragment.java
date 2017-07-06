@@ -27,8 +27,10 @@ import cz.msebera.android.httpclient.Header;
  * Created by splotnik on 7/3/17.
  */
 
-public class TweetsListFragment extends Fragment {
-
+public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAdapterListener {
+public interface TweetSelectedListener{
+    public void onTweetSelected(Tweet tweet);
+}
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
@@ -49,7 +51,7 @@ public class TweetsListFragment extends Fragment {
         // init the arraylist (data source)
         tweets = new ArrayList<>();
         // construct the adapter from this datasource
-        tweetAdapter = new TweetAdapter(tweets);
+        tweetAdapter = new TweetAdapter(tweets, this);
         // RecyclerView setup (layout manager, use adapter)
         rvTweets.setLayoutManager(new LinearLayoutManager(getContext()));
         // set the adapter
@@ -103,5 +105,12 @@ public class TweetsListFragment extends Fragment {
 
     public void hideProgressBar(){
         miActionProgressItem.setVisible(false);
+    }
+
+    @Override
+    public void onItemSelected(View view, int position){
+        Tweet tweet = tweets.get(position);
+
+        ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
     }
 }

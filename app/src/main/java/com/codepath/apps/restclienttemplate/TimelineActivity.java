@@ -14,12 +14,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.fragments.HomeTimelineFragment;
+import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPagesAdapter;
+import com.codepath.apps.restclienttemplate.models.Tweet;
 
 /**
  * Created by splotnik on 6/27/17.
  */
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements TweetsListFragment.TweetSelectedListener{
 
     private SwipeRefreshLayout swipeContainer;
     HomeTimelineFragment fragmentHomeTimeline;
@@ -44,6 +46,12 @@ public class TimelineActivity extends AppCompatActivity {
     public void onProfileView(MenuItem item){
         Intent i = new Intent(this, ProfileActivity.class);
         startActivity(i);
+    }
+
+    public void onTweetSelected(Tweet tweet){
+        Intent i = new Intent(this, DetailsActivity.class);
+        startActivity(i);
+        //Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
     }
 
     public void onReplyAction(View view){

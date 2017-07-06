@@ -122,4 +122,8 @@ public class Tweet implements Parcelable {
     public long getUid() {
         return uid;
     }
+
+    public String getBody() {
+        return body;
+    }
 }

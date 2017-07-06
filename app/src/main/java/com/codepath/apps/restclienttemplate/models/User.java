@@ -88,5 +88,30 @@ public class User implements Parcelable {
     public long getUid() {
         return uid;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public String getTagLine() {
+        return tagLine;
+    }
+
+    public int getFollowersCount() {
+        return followersCount;
+    }
+
+    public int getFollowingCount() {
+        return followingCount;
+    }
+
+    public static Creator<User> getCREATOR() {
+        return CREATOR;
+    }
 }
+
 
