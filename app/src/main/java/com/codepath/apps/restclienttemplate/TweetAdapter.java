@@ -1,15 +1,19 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -43,7 +47,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Tweet tweet = mTweets.get(position);
+        final Tweet tweet = mTweets.get(position);
 
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
@@ -51,6 +55,22 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvScreenName.setText(tweet.user.screenName);
 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
+
+        // Add on click listener for detail button
+        Button detail_button = holder.detail_button;
+        detail_button.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                // Package and send over the parent tweet
+                Intent i = new Intent(context, DetailsActivity.class);
+
+                // Pass relevant data back as a result
+                i.putExtra("current_tweet", Parcels.wrap(tweet));
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -64,7 +84,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvBody;
         public TextView createdAt;
         public TextView tvScreenName;
-
+        public Button detail_button;
 
 
         public ViewHolder(View itemView) {
@@ -75,6 +95,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             createdAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
             tvScreenName = (TextView) itemView.findViewById(R.id.tvScreenName);
+            detail_button = (Button) itemView.findViewById(R.id.detail_button);
             //handle click event
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view){
@@ -87,6 +108,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         }
 
     }
+
 
 
     // Clean all elements of the recycler

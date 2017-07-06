@@ -84,4 +84,14 @@
         android:onClick="onReplyAction"
    />
 
+    <Button
+        android:id="@+id/detail_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/ivProfileImage"
+        android:layout_toStartOf="@+id/tvUsername"
+        android:background="@android:color/transparent"
+        android:onClick="onClick"
+        android:visibility="visible" />
+
 </RelativeLayout>
