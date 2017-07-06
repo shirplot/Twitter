@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,10 +45,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                 try {
                     User user = User.fromJSON(response);
-                    //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_profile);
+                    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_profile);
                     // Sets the Toolbar to act as the ActionBar for this Activity window.
                     // Make sure the toolbar exists in the activity and is not null
-                   // setSupportActionBar(toolbar);
+                   setSupportActionBar(toolbar);
                     getSupportActionBar().setTitle(user.screenName);
                     populateUserHeadline(user);
                 } catch (JSONException e) {
@@ -55,6 +56,16 @@ public class ProfileActivity extends AppCompatActivity {
                 }
 
 
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
     }

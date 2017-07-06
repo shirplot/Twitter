@@ -77,8 +77,10 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
 	public void getUserInfo(AsyncHttpResponseHandler handler) {
-		String apiUrl = getApiUrl("statuses/verify_credentials.json");
-		// Can specify query string params directly or through RequestParams.
+		String apiUrl = getApiUrl("account/verify_credentials.json");
+		client.get(apiUrl, handler);
+
+				// Can specify query string params directly or through RequestParams.
 	}
 
 
@@ -87,6 +89,7 @@ public class TwitterClient extends OAuthBaseClient {
 		String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 		SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
 		sf.setLenient(true);
+
 
 		String relativeDate = "";
 		try {

@@ -6,12 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.apps.restclienttemplate.ProfileActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_profile"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetLeft="150dp"
+        app:contentInsetStart="150dp"
+        app:titleTextColor="@android:color/white"></android.support.v7.widget.Toolbar>
+
     <RelativeLayout
         android:id="@+id/rlUserHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_below="@+id/toolbar_profile">
         
         <ImageView
             android:id="@+id/ivProfileImage"

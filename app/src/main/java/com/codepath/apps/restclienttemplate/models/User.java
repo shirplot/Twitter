@@ -50,9 +50,9 @@ public class User implements Parcelable {
         dest.writeLong(this.uid);
         dest.writeString(this.screenName);
         dest.writeString(this.profileImageUrl);
-        //dest.writeString(this.tagLine);
-        //dest.writeInt(this.followersCount);
-        //dest.writeInt(this.followingCount);
+        dest.writeString(this.tagLine);
+        dest.writeInt(this.followersCount);
+        dest.writeInt(this.followingCount);
     }
 
     public User() {
@@ -63,9 +63,9 @@ public class User implements Parcelable {
         uid = in.readLong();
         screenName = in.readString();
         profileImageUrl = in.readString();
-        //this.tagLine = in.readString();
-        //this.followersCount = in.readInt();
-        //this.followingCount = in.readInt();
+        tagLine = in.readString();
+        followersCount = in.readInt();
+        followingCount = in.readInt();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
@@ -82,7 +82,7 @@ public class User implements Parcelable {
 
 
     public String getScreenName() {
-        return this.screenName;
+        return screenName;
     }
 
     public long getUid() {
