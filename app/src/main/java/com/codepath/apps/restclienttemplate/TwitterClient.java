@@ -82,7 +82,14 @@ public class TwitterClient extends OAuthBaseClient {
 
 				// Can specify query string params directly or through RequestParams.
 	}
+	public void getUserProfile(String screenName, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("users/show.json");
+		RequestParams params = new RequestParams();
+		params.put("screen_name", screenName);
+		client.get(apiUrl,params, handler);
 
+		// Can specify query string params directly or through RequestParams.
+	}
 
 	// getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
 	public String getRelativeTimeAgo(String rawJsonDate) {

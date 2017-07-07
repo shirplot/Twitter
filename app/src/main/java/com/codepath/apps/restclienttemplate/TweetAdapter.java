@@ -57,17 +57,17 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
 
         // Add on click listener for detail button
-        Button detail_button = holder.detail_button;
-        detail_button.setOnClickListener( new View.OnClickListener() {
+        Button profile_button = holder.profile_button;
+        profile_button.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
                 // Package and send over the parent tweet
-                Intent i = new Intent(context, DetailsActivity.class);
+                Intent i = new Intent(context, ProfileActivity.class);
 
                 // Pass relevant data back as a result
-                i.putExtra("current_tweet", Parcels.wrap(tweet));
+                i.putExtra("profile", Parcels.wrap(tweet));
                 context.startActivity(i);
             }
         });
@@ -84,7 +84,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvBody;
         public TextView createdAt;
         public TextView tvScreenName;
-        public Button detail_button;
+        public Button profile_button;
 
 
         public ViewHolder(View itemView) {
@@ -95,7 +95,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             createdAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
             tvScreenName = (TextView) itemView.findViewById(R.id.tvScreenName);
-            detail_button = (Button) itemView.findViewById(R.id.detail_button);
+            profile_button = (Button) itemView.findViewById(R.id.profile_button);
             //handle click event
             itemView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view){

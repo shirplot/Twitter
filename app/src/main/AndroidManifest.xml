@@ -37,7 +37,6 @@
         <activity android:name=".ComposeActivity" />
         <activity android:name=".ReplyActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".DetailsActivity"></activity>
     </application>
 
 </manifest>

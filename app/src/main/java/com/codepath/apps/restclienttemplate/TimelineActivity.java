@@ -48,11 +48,6 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         startActivity(i);
     }
 
-    public void onTweetSelected(Tweet tweet){
-        Intent i = new Intent(this, DetailsActivity.class);
-        startActivity(i);
-        //Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
-    }
 
     public void onReplyAction(View view){
         Intent i = new Intent(this, ReplyActivity.class);
@@ -97,5 +92,8 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
     }
 
 
+    @Override
+    public void onTweetSelected(Tweet tweet) {
 
+    }
 }

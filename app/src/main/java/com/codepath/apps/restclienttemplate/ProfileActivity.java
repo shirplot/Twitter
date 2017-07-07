@@ -20,6 +20,7 @@ import cz.msebera.android.httpclient.Header;
 public class ProfileActivity extends AppCompatActivity {
 
     TwitterClient client;
+    String screenName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,38 +39,73 @@ public class ProfileActivity extends AppCompatActivity {
         ft.commit();
 
         client = TwitterApp.getRestClient();
-        client.getUserInfo(new JsonHttpResponseHandler() {
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+        if (getIntent().hasExtra("screen_name")) {
+            client.getUserProfile(screenName, new JsonHttpResponseHandler() {
 
-                try {
-                    User user = User.fromJSON(response);
-                    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_profile);
-                    // Sets the Toolbar to act as the ActionBar for this Activity window.
-                    // Make sure the toolbar exists in the activity and is not null
-                   setSupportActionBar(toolbar);
-                    getSupportActionBar().setTitle(user.screenName);
-                    populateUserHeadline(user);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                    try {
+                        User user = User.fromJSON(response);
+                        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_profile);
+                        // Sets the Toolbar to act as the ActionBar for this Activity window.
+                        // Make sure the toolbar exists in the activity and is not null
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setTitle(user.screenName);
+                        populateUserHeadline(user);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
                 }
 
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                }
 
-            }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                }
+            });
+        }
+        else{
+            client.getUserInfo( new JsonHttpResponseHandler(){
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-        });
+                    try {
+                        User user = User.fromJSON(response);
+                        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_profile);
+                        // Sets the Toolbar to act as the ActionBar for this Activity window.
+                        // Make sure the toolbar exists in the activity and is not null
+                        setSupportActionBar(toolbar);
+                        getSupportActionBar().setTitle(user.screenName);
+                        populateUserHeadline(user);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                }
+            });
+
+        }
     }
-
         public void populateUserHeadline(User user){
         TextView tvName = (TextView) findViewById(R.id.tvName);
             TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
